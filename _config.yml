@@ -1,10 +1,10 @@
 # Site settings
-title: BY Blog
-SEOTitle: sp4rk的博客 | BY Blog
+title: 
+SEOTitle: sp4rk's blog
 header-img: img/post-bg-desk.jpg
 email: sp4rksec@gmail.com
-description: "Every failure is leading towards success."
-keyword: "BY, BY Blog, sp4rk的博客, sp4rk, web sercurity"
+description: "The thought bloom the bright spark."
+keyword: "sp4rk的博客, sp4rk, web sercurity"
 url: "http://5p4rk.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/5p4rk/5p4rk.github.io.git" # you code repository
