@@ -97,16 +97,10 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "3as0n",
+        title: "3as0n's blog",
         href: "http://3as0n.cn"
     },{
-        title: "简书·BY",
-        href: "http://www.jianshu.com/u/e71990ada2fd"
-    },{
-        title: "Apple",
-        href: "https://apple.com"
-    },{
-        title: "Apple Developer",
-        href: "https://developer.apple.com/"
+        title: "songjianyang's blog",
+        href: "https://songjianyang.github.io/"
     }
 ]
